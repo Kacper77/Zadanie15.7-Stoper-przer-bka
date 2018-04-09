@@ -1,4 +1,4 @@
-class Stopwatch {
+/*class Stopwatch {
     constructor(display) {
         this.running = false;
         this.display = display;
@@ -73,3 +73,74 @@ function pad0(value) {
     }
     return result;
 }
+*/
+
+class Stopwatch extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            running: false,
+            times: {
+                minutes: 0,
+                seconds: 0,
+                miliseconds: 0
+            }
+        }
+    }
+
+    reset() {
+        this.setState(defaultState);
+    }
+
+    format() {
+        return `${pad0(this.state.times.minutes)}:${pad0(this.state.times.seconds)}:${pad0(Math.floor(times.state.miliseconds))}`;
+    }
+
+    start() {
+        if (!this.state.running) {
+            this.setState({ running: true });
+            this.watch = setInterval(() => this.step(), 10);
+        }
+    }
+    step() {
+        if (!this.state.running) return;
+        this.calculate();
+    }
+
+    calculate() {
+        diffrentTimes.miliseconds += 1;
+
+        if (diffrentTimes.miliseconds >= 100) {
+            diffrentTimes.seconds += 1;
+            diffrentTimes.miliseconds = 0;
+        }
+        if (diffrentTimes.seconds >= 60) {
+            diffrentTimes.minutes += 1;
+            diffrentTimes.seconds = 0;
+        }
+    }
+
+    stop() {
+        this.running = false;
+        clearInterval(this.watch);
+    }
+
+    render() {
+        <div>
+            <button onClick={() => this.start()}>Start</button>
+            <button onClick={() => this.stop()}>Stop</button>
+            <button onClick={() => this.reset()}>Reset</button>
+            <div className='results'> {this.format()} </div>
+        </div>
+    }
+}
+
+function pad0(value) {
+    let result = value.toString();
+    if (result.length < 2) {
+        result = '0' + result;
+    }
+    return result;
+}
+
+ReactDOM.render(<Stopwatch />, document.getElementById('app'));
