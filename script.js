@@ -74,6 +74,11 @@ function pad0(value) {
     return result;
 }
 */
+this.setState({
+    minutes: 0,
+    seconds: 0,
+    miliseconds: 0
+})
 
 class Stopwatch extends React.Component {
     constructor() {
@@ -108,20 +113,27 @@ class Stopwatch extends React.Component {
     }
 
     calculate() {
-        diffrentTimes.miliseconds += 1;
+        const { miliseconds, seconds, minutes } = this.state;
 
-        if (diffrentTimes.miliseconds >= 100) {
-            diffrentTimes.seconds += 1;
-            diffrentTimes.miliseconds = 0;
+        miliseconds += 1;
+        if (miliseconds >= 100) {
+            seconds + = 1;
+            miliseconds = 0;
         }
-        if (diffrentTimes.seconds >= 60) {
-            diffrentTimes.minutes += 1;
-            diffrentTimes.seconds = 0;
+        if (seconds >= 60) {
+            minutes += 1;
+            seconds = 0;
         }
+
+        this.setState({
+            miliseconds,
+            seconds,
+            minutes
+        })
     }
 
     stop() {
-        this.running = false;
+        this.setState({ running: false });
         clearInterval(this.watch);
     }
 
