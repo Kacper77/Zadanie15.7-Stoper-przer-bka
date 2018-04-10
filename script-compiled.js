@@ -176,7 +176,7 @@ var Stopwatch = function (_React$Component) {
         value: function render() {
             var _this3 = this;
 
-            React.createElement(
+            return React.createElement(
                 'div',
                 null,
                 React.createElement(
